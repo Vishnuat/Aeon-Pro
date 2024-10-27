@@ -3,6 +3,8 @@ from re import IGNORECASE, escape, search
 nsfw_keywords = [
     "porn",
     "onlyfans",
+    "HDTC",
+    "PreDVDRip",
     "nsfw",
     "Brazzers",
     "adult",
