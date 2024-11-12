@@ -24,7 +24,6 @@ from bot.helper.ext_utils.bot_utils import (
 )
 from bot.helper.ext_utils.bulk_links import extract_bulk_links
 from bot.helper.aeon_utils.nsfw_check import nsfw_precheck
-from bot.helper.aeon_utils.send_react import send_react
 from bot.helper.ext_utils.help_strings import YT_HELP_MESSAGE
 from bot.helper.ext_utils.task_manager import task_utils
 from bot.helper.telegram_helper.filters import CustomFilters
@@ -287,7 +286,6 @@ async def _mdisk(link, name):
 
 @new_task
 async def _ytdl(client, message, is_leech=False, same_dir=None, bulk=[]):
-    await send_react(message)
     text = message.text.split("\n")
     input_list = text[0].split(" ")
     qual = ""
@@ -371,7 +369,7 @@ async def _ytdl(client, message, is_leech=False, same_dir=None, bulk=[]):
     async def __run_multi():
         if multi <= 1:
             return
-        await sleep(5)
+        await sleep(2)
         if len(bulk) != 0:
             msg = input_list[:1]
             msg.append(f"{bulk[0]} -i {multi - 1}")
@@ -390,7 +388,7 @@ async def _ytdl(client, message, is_leech=False, same_dir=None, bulk=[]):
         if folder_name:
             same_dir["tasks"].add(nextmsg.id)
         nextmsg.from_user = message.from_user
-        await sleep(5)
+        await sleep(2)
         _ytdl(client, nextmsg, is_leech, same_dir, bulk)
 
     path = f"/usr/src/app/downloads/{message.id}{folder_name}"
